@@ -1,0 +1,11 @@
+{
+    "Name": "RemoteId",
+    "IDs": [
+        "NewGame",
+        "Continue",
+        "SaveFile",
+        "LoadFile",
+        "DeleteSave",
+        "PickUp"
+    ]
+}
