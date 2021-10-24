@@ -45,6 +45,9 @@
     "@flamework/core": "^1.0.0-beta.1",
     "@rbxts/net": "^2.1.4",
     "@rbxts/object-utils": "^1.0.4",
+    "@rbxts/roact": "^1.4.0-ts.2",
+    "@rbxts/roact-rodux": "^0.2.2-ts.5",
+    "@rbxts/rodux": "^3.0.0-ts.3",
     "@rbxts/services": "^1.2.0"
   }
 }
