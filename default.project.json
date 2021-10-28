@@ -1,5 +1,5 @@
 {
-	"name": "flamework-game",
+	"name": "Halloween 2021",
 	"globIgnorePaths": [
 		"**/package.json",
 		"**/tsconfig.json"
@@ -11,6 +11,10 @@
 			"TS": {
 				"$path": "out/server"
 			}
+		},
+		"ServerStorage": {
+			"$className": "ServerStorage",
+			"$path": "assets/serverstorage"
 		},
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
@@ -38,6 +42,8 @@
 		},
 		"Workspace": {
 			"$className": "Workspace",
+			"$path": "assets/workspace",
+			"$ignoreUnknownInstances": true,
 			"$properties": {
 				"FilteringEnabled": true
 			}
@@ -52,6 +58,37 @@
 			"$className": "SoundService",
 			"$properties": {
 				"RespectFilteringEnabled": true
+			}
+		},
+		"Lighting": {
+			"$className": "Lighting",
+			"$path": "assets/lighting",
+			"$properties": {
+				"Technology": "Future",
+				"Ambient": [
+					0.75,
+					0.80,
+					0.90
+				],
+				"ColorShift_Bottom": [
+					0.80,
+					0.67,
+					0.79
+				],
+				"ColorShift_Top": [
+					1,
+					1,
+					0.80
+				],
+				"OutdoorAmbient": [
+					1,
+					1,
+					1
+				],
+				"Brightness": 1.6,
+				"EnvironmentDiffuseScale": 1,
+				"EnvironmentSpecularScale": 1,
+				"ClockTime": 10
 			}
 		}
 	}

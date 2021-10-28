@@ -10,7 +10,20 @@
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"cSpell.words": [
-		"NPCs"
-	]
+	"Lua.diagnostics.globals": [
+		"task",
+		"remodel",
+		"arg"
+	],
+	"Lua.diagnostics.disable": [
+		"incorrect-call-arguments",
+		"missing-module-return"
+	],
+	"Lua.diagnostics.ignore": [
+		"ConnectParallel"
+	],
+	"Lua.runtime.version": "Luau",
+	"robloxLsp.diagnostics.globals": [
+		"remodel"
+	],
 }

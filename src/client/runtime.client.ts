@@ -1,7 +1,15 @@
+// Bootstraps the Flamework runtime on the client
 import { Flamework } from "@flamework/core";
+import Log, { Logger, LogLevel } from "@rbxts/log";
+import { RunService } from "@rbxts/services";
 
-Flamework.addPaths("src/client/components");
-Flamework.addPaths("src/client/controllers");
+Log.SetLogger(
+    Logger.configure()
+        .SetMinLogLevel(RunService.IsStudio() ? LogLevel.Verbose : LogLevel.Information)
+        .EnrichWithProperty("Version", PKG_VERSION)
+        .WriteTo(Log.RobloxOutput({ TagFormat: "full" }))
+        .Create(),
+);
 
-print("Hello");
+Flamework.addPaths("src/client/controllers", "src/client/components", "src/client/apps", "src/client/interactions");
 Flamework.ignite();
