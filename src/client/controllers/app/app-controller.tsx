@@ -8,26 +8,10 @@ import { CollectionService, Players } from "@rbxts/services";
 import { ClientStore, IClientStore } from "client/rodux/rodux";
 import { Scene } from "types/enum/scene";
 import { DecoratorMetadata } from "types/interfaces/flamework";
-import SceneController from "./scene-controller";
+import SceneController from "../scene-controller";
+import { IAppConfig, App } from "./app-decorator";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ClassDecorator = (ctor: any) => any;
 type Constructor<T = Roact.Component> = new (...args: never[]) => T;
-
-export interface IAppConfig {
-    /** Debug name for app. */
-    name: string;
-    /** Only show this app if we are in one of these scenes. */
-    requiredScenes?: Scene[];
-    /** Show this app on any part with this CollectionService tag. */
-    tag?: string;
-    /** Display order of Surface/ScreenGui. */
-    displayOrder?: number;
-    /** Ignore topbar inset if rendering with a ScreenGui. */
-    ignoreGuiInset?: boolean;
-    /** If this is specified then the root component will be connected to Rodux. */
-    mapStateToProps?: (state: IClientStore) => unknown;
-}
 
 interface AppInfo {
     ctor: Constructor;
@@ -35,7 +19,7 @@ interface AppInfo {
     config: IAppConfig;
 }
 
-export declare function App(opts: IAppConfig): ClassDecorator;
+const appKey = `flamework:decorators.${Flamework.id<typeof App>()}`;
 
 /** Handles the loading of classes decorated with App */
 @Controller({})
@@ -54,10 +38,7 @@ export default class AppController implements OnInit {
         this.sceneController.OnSceneChanged.Connect((n, o) => this.onSceneChanged(n, o));
 
         for (const [ctor, identifier] of Reflect.objToId) {
-            const app = Reflect.getOwnMetadata<DecoratorMetadata<IAppConfig>>(
-                ctor,
-                `flamework:decorators.${Flamework.id<typeof App>()}`,
-            );
+            const app = Reflect.getOwnMetadata<DecoratorMetadata<IAppConfig>>(ctor, appKey);
 
             if (app) {
                 const config = app.arguments[0];
