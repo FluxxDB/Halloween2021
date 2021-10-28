@@ -35,9 +35,9 @@ export default class CameraController implements OnInit {
 
     private cameraUpdate() {
         if (this.cameraEnabled || this.inputController.getCharacterInputsEnabled()) {
-            UserInputService.MouseBehavior = Enum.MouseBehavior.Default;
-        } else {
             UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter;
+        } else {
+            UserInputService.MouseBehavior = Enum.MouseBehavior.Default;
             return;
         }
 
