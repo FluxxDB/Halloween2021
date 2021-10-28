@@ -8,8 +8,7 @@ import { Remotes } from "shared/remotes";
 export class characterController implements OnInit, OnStart {
 	onInit() {}
 	onStart() {
-		Remotes.Client.WaitFor(RemoteId.Spawn).then((ElRemote) => {
-			ElRemote.SendToServer("Farded");
-		});
+		const remote = Remotes.Client.Get(RemoteId.Spawn);
+		remote.SendToServer();
 	}
 }

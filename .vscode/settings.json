@@ -11,6 +11,10 @@
 	"eslint.format.enable": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"cSpell.words": [
-		"NPCs"
+		"Gerstner",
+		"NPCs",
+		"pcall",
+		"randomseed",
+		"setseed"
 	]
 }

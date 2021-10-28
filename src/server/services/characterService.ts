@@ -4,7 +4,6 @@ import { RemoteId } from "shared/remoteId";
 import { Remotes } from "shared/remotes";
 
 const Spawn = Remotes.Server.Create(RemoteId.Spawn);
-print(Spawn);
 
 @Service({
 	loadOrder: 0,

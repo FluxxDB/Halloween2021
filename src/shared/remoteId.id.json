@@ -1,7 +1,6 @@
 {
     "Name": "RemoteId",
     "IDs": [
-        "Ready",
         "Spawn",
         "PickUp"
     ]
