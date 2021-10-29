@@ -2,4 +2,8 @@
 /out
 /include
 *.tsbuildinfo
-flamework.build
+*.rbxl
+*.rbxlx
+**.lock
+**.build
+.env
