@@ -4,6 +4,7 @@ export const DefaultRig = {
     $className: "Model",
     HumanoidRootPart: {
         $className: "BasePart",
+        Camera: "Attachment",
         Pelvis: {
             $className: "Bone",
             Torso: {

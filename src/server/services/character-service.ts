@@ -11,7 +11,7 @@ PhysicsService.CreateCollisionGroup(CollisionGroup.Character);
 const rigs = ServerStorage.WaitForChild("Rigs");
 const entities = Workspace.WaitForChild("Entities");
 const characters = entities.WaitForChild("Characters");
-
+const spawn = Workspace.WaitForChild("SpawnLocation") as BasePart;
 @Service({})
 export default class CharacterService implements OnStart {
     /** @hidden */
@@ -21,6 +21,7 @@ export default class CharacterService implements OnStart {
 
         Events.Ready.connect(async (player) => {
             const character = await promiseRig(rigs.WaitForChild("Default")?.Clone() as Model);
+            character.HumanoidRootPart.CFrame = spawn.CFrame.add(new Vector3(0, 3, 0));
             character.Parent = characters;
             player.Character = character;
         });

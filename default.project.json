@@ -31,8 +31,20 @@
 				"$path": "out/shared"
 			}
 		},
+		"Players": {
+			"$className": "Players",
+			"$properties": {
+				"CharacterAutoLoads": false
+			}
+		},
 		"StarterPlayer": {
 			"$className": "StarterPlayer",
+			"$properties": {
+				"AutoJumpEnabled": false,
+				"LoadCharacterAppearance": false,
+				"CharacterJumpPower": 0,
+				"UserEmotesEnabled": false
+			},
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts",
 				"TS": {
