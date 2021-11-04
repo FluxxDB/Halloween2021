@@ -8,6 +8,7 @@ const player = Players.LocalPlayer;
 @Controller({})
 export default class CharacterController implements OnInit, OnStart {
     private currentCharacter?: DefaultRig;
+    public isMoving = false;
 
     /** @hidden */
     public onInit(): void {
@@ -30,5 +31,15 @@ export default class CharacterController implements OnInit, OnStart {
     private async onCharacterAdded(model: Model) {
         const character = await promiseRig(model);
         this.currentCharacter = character;
+        character.Humanoid.Running.Connect((speed) => {
+            if (speed > 0) {
+                this.isMoving = true;
+            } else {
+                this.isMoving = false;
+            }
+        });
+        character.Humanoid.Died.Connect(() => {
+            this.isMoving = false;
+        });
     }
 }
