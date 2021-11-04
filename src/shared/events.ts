@@ -5,7 +5,7 @@ interface ServerEvents {
 }
 
 interface ClientEvents {
-    Pulse(clockStart: number, pulsing: boolean): void;
+    Pulse(clockStart: number, corruption: number, pulsing: boolean): void;
 }
 
 export const GlobalEvents = Networking.createEvent<ServerEvents, ClientEvents>();
