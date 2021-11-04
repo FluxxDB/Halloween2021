@@ -1,5 +1,4 @@
 import Roact from "@rbxts/roact";
-import ScaleComponent from "./scale-component";
 
 const digits = new Map([
     ["0", "rbxassetid://7882797174"],
@@ -16,9 +15,10 @@ const digits = new Map([
 ]);
 
 type IProps = Roact.PropsWithChildren<{
-    digit: string;
-    position: UDim2;
-    size: UDim2;
+    Digit: string;
+    Position: UDim2;
+    Size: UDim2;
+    ImageTransparency: Roact.Binding<number>;
 }>;
 
 class DigitComponent extends Roact.PureComponent<IProps> {
@@ -26,12 +26,12 @@ class DigitComponent extends Roact.PureComponent<IProps> {
         return (
             <imagelabel
                 AnchorPoint={new Vector2(0.5, 0.5)}
-                Position={this.props.position}
-                Size={this.props.size}
+                Position={this.props.Position}
+                Size={this.props.Size}
                 BackgroundTransparency={1}
-                ImageTransparency={0.8}
                 ImageColor3={Color3.fromRGB(177, 177, 177)}
-                Image={digits.get(this.props.digit)}
+                Image={digits.get(this.props.Digit)}
+                ImageTransparency={this.props.ImageTransparency}
             >
                 <uiaspectratioconstraint AspectRatio={0.667364} />
             </imagelabel>
