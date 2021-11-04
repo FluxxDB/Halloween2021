@@ -12,6 +12,7 @@ const currentCamera = Workspace.WaitForChild("Camera") as Camera;
 
 let xAngle = 0;
 let yAngle = 0;
+let bobbingTimer = 0;
 
 @Controller({})
 export default class CameraController implements OnInit {
@@ -55,11 +56,14 @@ export default class CameraController implements OnInit {
         const character = this.characterController.getCurrentCharacter();
         if (!character) return;
 
-        const rootPart = character.HumanoidRootPart;
-        const headBone = rootPart.Pelvis.Torso.Head;
-        const headOffset = headBone.TransformedWorldCFrame.ToObjectSpace(headBone.WorldCFrame).Inverse();
-        const cameraOffset = rootPart.Camera.WorldCFrame.mul(headOffset);
+        if (this.characterController.isMoving) {
+            bobbingTimer += 1.5;
+        } else {
+            bobbingTimer += 0.1;
+        }
 
+        const rootPart = character.HumanoidRootPart;
+        const cameraOffset = rootPart.Camera.WorldCFrame.add(new Vector3(0, math.sin(bobbingTimer / 8) / 5, 0));
         currentCamera.CFrame = cameraOffset.mul(CFrame.Angles(math.rad(yAngle), 0, 0));
         rootPart.CFrame = CFrame.Angles(0, math.rad(xAngle), 0).add(rootPart.Position);
     }
