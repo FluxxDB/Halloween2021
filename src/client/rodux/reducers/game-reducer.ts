@@ -10,8 +10,8 @@ export interface IGameReducer {
 }
 
 const InitialState: IGameReducer = {
-    openScene: Scene.Game,
-    corruption: 100,
+    openScene: Scene.Menu,
+    corruption: 99,
     pulsing: false,
 };
 
@@ -27,7 +27,7 @@ export const gameReducer = Rodux.createReducer<IGameReducer, GameActions>(Initia
     SetCorruption: (state, action) => {
         return {
             ...state,
-            corruption: action.corruption,
+            corruption: math.min(action.corruption, 99),
         };
     },
     SetPulsing: (state, action) => {

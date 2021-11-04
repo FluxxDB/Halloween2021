@@ -1,4 +1,6 @@
-import { Controller, OnInit, Dependency, OnStart } from "@flamework/core";
+/* eslint-disable no-return-assign */
+import { Controller, OnInit, Dependency } from "@flamework/core";
+import CameraShaker from "@rbxts/camera-shaker";
 import { RunService, UserInputService, Workspace } from "@rbxts/services";
 import CharacterController from "./character-controller";
 import InputController from "./input-controller";
@@ -18,17 +20,21 @@ export default class CameraController implements OnInit {
     inputController: InputController = Dependency<InputController>();
     characterController: CharacterController = Dependency<CharacterController>();
 
+    private cameraShaker = new CameraShaker(
+        Enum.RenderPriority.Camera.Value,
+        (shakeCFrame) => (currentCamera.CFrame = currentCamera.CFrame.mul(shakeCFrame)),
+    );
+
     /** @hidden */
     public onInit(): void {
         // This is done due to roblox setting the camera type soon as the player gets added.
         currentCamera.CameraType = Enum.CameraType.Scriptable;
         currentCamera
             .GetPropertyChangedSignal("CameraType")
-            // eslint-disable-next-line no-return-assign
             .Connect(() => (currentCamera.CameraType = Enum.CameraType.Scriptable));
 
         UserInputService.InputChanged.Connect((i) => this.mouseUpdate(i));
-        RunService.BindToRenderStep("FPS", Enum.RenderPriority.Camera.Value + 1, () => this.cameraUpdate());
+        RunService.BindToRenderStep("FPS", Enum.RenderPriority.Camera.Value, () => this.cameraUpdate());
     }
 
     private mouseUpdate(inputObject: InputObject) {
@@ -56,5 +62,9 @@ export default class CameraController implements OnInit {
 
         currentCamera.CFrame = cameraOffset.mul(CFrame.Angles(math.rad(yAngle), 0, 0));
         rootPart.CFrame = CFrame.Angles(0, math.rad(xAngle), 0).add(rootPart.Position);
+    }
+
+    public getShaker() {
+        return this.cameraShaker;
     }
 }
