@@ -47,6 +47,7 @@
 			},
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts",
+				"$path": "assets/starterplayerscripts",
 				"TS": {
 					"$path": "out/client"
 				}
@@ -68,6 +69,7 @@
 		},
 		"SoundService": {
 			"$className": "SoundService",
+			"$path": "assets/soundservice",
 			"$properties": {
 				"RespectFilteringEnabled": true
 			}
@@ -89,8 +91,8 @@
 				],
 				"ColorShift_Top": [
 					1,
-					1,
-					0.80
+					0,
+					0
 				],
 				"OutdoorAmbient": [
 					1,
