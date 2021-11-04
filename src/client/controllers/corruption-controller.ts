@@ -1,10 +1,10 @@
 /* eslint-disable no-loop-func */
 import { Controller, Dependency, OnInit, OnStart } from "@flamework/core";
-import CameraShaker from "@rbxts/camera-shaker";
 import { SoundService, Workspace } from "@rbxts/services";
 import { Events } from "client/events";
 import { ClientStore } from "client/rodux/rodux";
 import CameraController from "./camera-controller";
+import SoundController, { SoundType } from "./sound-controller";
 
 const pulseEvent = Events.Pulse;
 
@@ -18,6 +18,7 @@ function createSFX(parent: Instance, id: number, volume: number) {
 
 @Controller({})
 export default class corruptionController implements OnInit, OnStart {
+    soundController: SoundController = Dependency<SoundController>();
     cameraController: CameraController = Dependency<CameraController>();
 
     private corruption = 100;
@@ -46,9 +47,13 @@ export default class corruptionController implements OnInit, OnStart {
                     ClientStore.dispatch({ type: "SetCorruption", corruption: this.corruption });
 
                     if (this.corruption !== this.lastCorruption) {
-                        const sfx = createSFX(SoundService, 2610939724, 2);
                         this.lastCorruption = this.corruption;
-                        sfx.Play();
+
+                        const sfx = this.soundController.playSound({
+                            sound: 2610939724,
+                            soundType: SoundType.SoundEffect,
+                            soundProperties: { Volume: 3 },
+                        });
                         sfx.Ended.Connect(() => {
                             sfx.Destroy();
                         });
