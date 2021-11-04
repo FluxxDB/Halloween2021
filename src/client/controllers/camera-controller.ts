@@ -56,14 +56,23 @@ export default class CameraController implements OnInit {
         const character = this.characterController.getCurrentCharacter();
         if (!character) return;
 
+        const rootPart = character.HumanoidRootPart;
+        let cameraOffset = rootPart.Camera.WorldCFrame;
+
         if (this.characterController.isMoving) {
             bobbingTimer += 1.5;
+            cameraOffset = rootPart.Camera.WorldCFrame.add(new Vector3(0, math.sin(bobbingTimer / 8) / 5, 0));
         } else {
             bobbingTimer += 0.1;
+            cameraOffset = rootPart.Camera.WorldCFrame.add(
+                new Vector3(
+                    math.sin(bobbingTimer / 8) / 6,
+                    math.sin(bobbingTimer / 8) / 5,
+                    math.sin(bobbingTimer / 8) / 6,
+                ),
+            );
         }
 
-        const rootPart = character.HumanoidRootPart;
-        const cameraOffset = rootPart.Camera.WorldCFrame.add(new Vector3(0, math.sin(bobbingTimer / 8) / 5, 0));
         currentCamera.CFrame = cameraOffset.mul(CFrame.Angles(math.rad(yAngle), 0, 0));
         rootPart.CFrame = CFrame.Angles(0, math.rad(xAngle), 0).add(rootPart.Position);
     }
