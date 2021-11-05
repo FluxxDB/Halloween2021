@@ -12,7 +12,6 @@ export default class SceneController implements OnStart {
         this.onSceneChanged(ClientStore.getState().gameState.openScene);
 
         ClientStore.changed.connect((newState, oldState) => {
-            print(newState, oldState, newState.gameState.openScene, oldState.gameState.openScene);
             if (newState.gameState.openScene !== oldState.gameState.openScene) {
                 this.onSceneChanged(newState.gameState.openScene, oldState.gameState.openScene);
             }

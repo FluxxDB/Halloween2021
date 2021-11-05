@@ -12,16 +12,15 @@ export default class corruptionService implements OnStart {
 
     /** @hidden */
     public onStart() {
-        task.defer(() => {
-            task.wait(6);
-
-            this.startPulse();
-            task.wait(10);
-            this.stopPulse();
-            print(this.corruption);
-            task.wait(2);
-            this.startPulse();
-        });
+        // task.defer(() => {
+        //     task.wait(6);
+        //     this.startPulse();
+        //     task.wait(10);
+        //     this.stopPulse();
+        //     print(this.corruption);
+        //     task.wait(2);
+        //     this.startPulse();
+        // });
     }
 
     public startPulse() {
