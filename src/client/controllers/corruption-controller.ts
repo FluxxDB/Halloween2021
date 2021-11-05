@@ -23,7 +23,7 @@ export default class corruptionController implements OnInit, OnStart {
             this.clientPulsing = serverPulsing;
             this.clientStart = serverStart;
             this.serverCorruption = serverCorruption - (Workspace.GetServerTimeNow() - serverStart);
-            ClientStore.dispatch({ type: "SetPulsing", pulsing: this.clientPulsing });
+            if (this.corruption <= 1) return;
             this.lightingController.pumpAdrenaline(2610939724, { Volume: 2 });
         });
     }

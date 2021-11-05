@@ -1,6 +1,6 @@
 local STAGING_PLACES = {};
 
-local PRODUCTION_PLACES = {};
+local PRODUCTION_PLACES = {["7813397089"] = "Horror Meat"};
 
 -- The built game file should be created by the Actions pipeline beforehand
 print("Reading source game file")
@@ -22,6 +22,7 @@ for placeId, placeName in pairs(desiredPlaces) do
     print(string.format('Starting to publish to place "%s" (%s)', placeName, placeId))
 
     local startTimePlace = os.clock();
+    print(game, placeId, placeName)
     remodel.writeExistingPlaceAsset(game, placeId);
 
     local diffTime = (os.clock() - startTimePlace);

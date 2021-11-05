@@ -7,7 +7,6 @@ import { Scene } from "types/enum/scene";
 
 type IProps = Roact.PropsWithChildren<{
     corruption: number;
-    pulsing: boolean;
 }>;
 
 interface IState {}
@@ -22,7 +21,7 @@ function getDigit(num: number, digit: number) {
     name: "counter",
     requiredScenes: [Scene.Menu],
     mapStateToProps: (store: IClientStore) => {
-        return identity<IProps>({ corruption: store.gameState.corruption, pulsing: store.gameState.pulsing });
+        return identity<IProps>({ corruption: store.gameState.corruption });
     },
 })
 class CounterApp extends Roact.PureComponent<IProps, IState> {
