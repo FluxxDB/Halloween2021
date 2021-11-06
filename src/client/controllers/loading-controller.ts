@@ -1,12 +1,31 @@
-import { Controller, OnStart } from "@flamework/core";
+import { Controller, Dependency, OnStart } from "@flamework/core";
 import { CollectionService, ContentProvider } from "@rbxts/services";
 import { ClientStore } from "client/rodux/rodux";
+import SoundController, { SoundType } from "./sound-controller";
 
 @Controller({})
 export default class LoadingController implements OnStart {
+    soundController: SoundController = Dependency<SoundController>();
+
     /** @hidden */
     public onStart() {
         this.loadAssets(CollectionService.GetTagged("Preload"));
+        task.delay(2.35, () => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const bgm = this.soundController.playSound({
+                sound: 4491762324,
+                soundType: SoundType.SoundEffect,
+                fadeInTime: 1,
+                soundProperties: { Volume: 0.325, Looped: true },
+            });
+
+            // TODO: Stop song when player is succ into factory
+            // const volumeTween = TweenService.Create(bgm, new TweenInfo(5, Enum.EasingStyle.Linear), { Volume: 0 });
+            // volumeTween.Play();
+            // volumeTween.Completed.Connect(() => {
+            //     bgm.Destroy();
+            // });
+        });
     }
 
     public loadAssets(assets: Instance[]) {
