@@ -5,7 +5,7 @@ import { Events } from "server/events";
 const pulseEvent = Events.Pulse;
 
 @Service({})
-export default class corruptionService implements OnStart {
+export default class CorruptionService implements OnStart {
     private corruption = 100;
     private pulsing = false;
     private start = Workspace.GetServerTimeNow();
@@ -13,12 +13,7 @@ export default class corruptionService implements OnStart {
     /** @hidden */
     public onStart() {
         // task.defer(() => {
-        //     task.wait(6);
-        //     this.startPulse();
-        //     task.wait(10);
-        //     this.stopPulse();
-        //     print(this.corruption);
-        //     task.wait(2);
+        //     task.wait(14);
         //     this.startPulse();
         // });
     }

@@ -1,11 +1,13 @@
 import { Controller, Dependency, OnStart } from "@flamework/core";
 import { CollectionService, ContentProvider } from "@rbxts/services";
 import { ClientStore } from "client/rodux/rodux";
+import CameraController from "./camera-controller";
 import SoundController, { SoundType } from "./sound-controller";
 
 @Controller({})
 export default class LoadingController implements OnStart {
     soundController: SoundController = Dependency<SoundController>();
+    cameraController: CameraController = Dependency<CameraController>();
 
     /** @hidden */
     public onStart() {
@@ -19,12 +21,15 @@ export default class LoadingController implements OnStart {
                 soundProperties: { Volume: 0.325, Looped: true },
             });
 
-            // TODO: Stop song when player is succ into factory
+            // TODO: Stop song after cutscene
             // const volumeTween = TweenService.Create(bgm, new TweenInfo(5, Enum.EasingStyle.Linear), { Volume: 0 });
             // volumeTween.Play();
             // volumeTween.Completed.Connect(() => {
             //     bgm.Destroy();
             // });
+
+            this.cameraController.setState(true);
+            print("reassigned state");
         });
     }
 

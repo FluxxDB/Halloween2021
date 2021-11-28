@@ -8,7 +8,7 @@ import LightingController from "./lighting-controller";
 const pulseEvent = Events.Pulse;
 
 @Controller({})
-export default class corruptionController implements OnInit, OnStart {
+export default class CorruptionController implements OnInit, OnStart {
     lightingController: LightingController = Dependency<LightingController>();
 
     private corruption = 100;

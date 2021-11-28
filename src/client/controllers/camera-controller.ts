@@ -2,6 +2,7 @@
 import { Controller, OnInit, Dependency } from "@flamework/core";
 import CameraShaker from "@rbxts/camera-shaker";
 import { RunService, UserInputService, Workspace } from "@rbxts/services";
+import { ClientStore } from "client/rodux/rodux";
 import CharacterController from "./character-controller";
 import InputController from "./input-controller";
 
@@ -46,6 +47,8 @@ export default class CameraController implements OnInit {
     }
 
     private cameraUpdate() {
+        if (!ClientStore.getState().cameraState.cameraControl) return;
+
         if (this.cameraEnabled || this.inputController.getCharacterInputsEnabled()) {
             UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter;
         } else {
@@ -75,6 +78,10 @@ export default class CameraController implements OnInit {
 
         currentCamera.CFrame = cameraOffset.mul(CFrame.Angles(math.rad(yAngle), 0, 0));
         rootPart.CFrame = CFrame.Angles(0, math.rad(xAngle), 0).add(rootPart.Position);
+    }
+
+    public setState(cameraControl: boolean) {
+        ClientStore.dispatch({ type: "SetCameraControl", cameraControl });
     }
 
     public getShaker() {
